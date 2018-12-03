@@ -18,8 +18,20 @@ namespace Triangle_Information
             sides[1] = value2;
             sides[2] = value3;
         }
+        public void setValue1(int value1)
+        {
+            sides[0] = value1;
+        }
+        public void setValue2(int value2)
+        {
+            sides[1] = value2;
+        }
+        public void setValue3(int value3)
+        {
+            sides[2] = value3;
+        }
         /*
-         * A triangle is valid if the sum of smaller sides are bigger than the bigger side
+         * A triangle is valid if the sum of two sides are greater than the other side
          */
         public bool isValid()
         { 
@@ -28,32 +40,16 @@ namespace Triangle_Information
             {
                 valid = true;
             }
-
-
-
-
-            //int biggerSide = sides.Max();
-            //int sumOfSmallerSides = sides.Except(sides.Where(a => a == biggerSide)).Sum();
-            //System.Diagnostics.Debug.WriteLine("Bigger side " + biggerSide);
-            //System.Diagnostics.Debug.WriteLine("Sum of smaller sides " + sumOfSmallerSides);
-            //if (sumOfSmallerSides > biggerSide)
-            //{
-            //    valid = true;
-            //}
-            //if(sides[0] == sides[1] & sides[1] == sides[2])
-            //{
-            //    valid = true;
-            //}
             return valid;
         }
-        public string triangleType()
+        public string getTriangleType()
         {
             string type = "Triangle";
+            int biggerSide = sides.Max();
+            int[] bc = sides.Except(sides.Where(a => a == biggerSide)).ToArray();
             try
             {
-                int biggerSide = sides.Max();
-                int[] bc = sides.Except(sides.Where(a => a == biggerSide)).ToArray();
-                if (Math.Pow(biggerSide, 2) == Math.Pow(bc[0],2) + Math.Pow(bc[2], 2))
+                if (Math.Pow(biggerSide, 2) == (Math.Pow(bc[0],2) + Math.Pow(bc[1], 2)))
                 {
                     type = "Right";
                     return type;

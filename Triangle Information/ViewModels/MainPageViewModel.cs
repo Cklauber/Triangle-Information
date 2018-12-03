@@ -10,16 +10,20 @@ namespace Triangle_Information.ViewModel
 {
     class MainPageViewModel : BaseModel
     {
-        private Triangle triangle_ = null;
         private int value1_ = 0;
         private int value2_ = 0;
         private int value3_ = 0;
+        private Triangle triangle_ = null;
         private bool isValidated_ = true;
         private string result_ = "";
         private string triangleType_ = "";
 
+        /**
+         * Setting up the Properties
+         */
         public string Side1
         {
+            //The getters convert 0 to "" so that when the application starts we have empty fields
             get
             {
                 if(value1_ == 0)
@@ -33,6 +37,7 @@ namespace Triangle_Information.ViewModel
             }
             set
             {
+                //In case the field is empty, we don't want the application to break.
                 if (value == "")
                 {
                     value = "0";
@@ -104,6 +109,9 @@ namespace Triangle_Information.ViewModel
         {
             get => isValidated_;
         }
+        /**
+         * Starting up with the logic
+         */
         public ICommand Validate
         {
             get
@@ -117,30 +125,39 @@ namespace Triangle_Information.ViewModel
             {
                 isValidated_ = true;
                 OnPropertyChanged("IsValidated");
-                triangle_ = new Triangle(value1_, value2_, value3_);
-                System.Diagnostics.Debug.WriteLine(value1_);
-                System.Diagnostics.Debug.WriteLine(value2_);
-                System.Diagnostics.Debug.WriteLine(value3_);
-                System.Diagnostics.Debug.WriteLine(triangle_.isValid());
+                /*
+                 * I opted to create this as a singleton so that we don't
+                 * instanciate the triangle every time we run the validator
+                 */
+                if(triangle_ == null)
+                {
+                    triangle_ = new Triangle(value1_, value2_, value3_);
+                }
+                else
+                {
+                    triangle_.setValue1(value1_);
+                    triangle_.setValue2(value2_);
+                    triangle_.setValue3(value3_);
+                }
+
+                //Now we will check if this is a valid triangle or not.
                 if (triangle_.isValid())
                 {
                     result_ = "This is a valid triangle";
-                    triangleType_ = triangle_.triangleType();
+                    triangleType_ = "Triangle type: " + triangle_.getTriangleType();
                     OnPropertyChanged("TriangleType");
                 }
                 else
                 {
                     result_ = "This is not a valid triangle";
                 }
-
                 OnPropertyChanged("Result");
-                System.Diagnostics.Debug.WriteLine("Valid");
             }
+            //This is in case our fields just have 0s(in other words no values in there)
             else
             {
                 isValidated_ = false;
                 OnPropertyChanged("IsValidated");
-                System.Diagnostics.Debug.WriteLine("Not Valid");
             }
         }
     }
