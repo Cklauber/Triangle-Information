@@ -5,10 +5,10 @@ This project uses the MVVM pattern since I believe it is a very nice pattern tha
 Currently the fields to enter the value for each side only accepts integers, but the project is easily escalable to work with decimals.
 
 The types of triangles it knows are:
- Right
- Equilateral
- Isosceles
- Triangle(for every other triangle)
+- Right
+- Equilateral
+- Isosceles
+- Triangle(for every other triangle)
 
 To get started just clone the project, open the .sln file and start the application.
 
