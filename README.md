@@ -13,4 +13,5 @@ The types of triangles it knows are:
 To get started just clone the project, open the .sln file and start the application.
 
 Thank you.
+
 Clauber Oliveira
