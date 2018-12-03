@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -25,6 +26,19 @@ namespace Triangle_Information
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        private void ValidateIsNumber(TextBox sender, TextBoxBeforeTextChangingEventArgs args)
+        {
+            args.Cancel = args.NewText.Any(a => !char.IsDigit(a));
+            //Initially I was going to use decimal, but since UWP is so annoying with binding decimals with the XAML, we are going to the code above
+            //If we wanted to use decimal, we could use the code below, but we would have to create a converter to properly bind
+                //Regex r = new Regex(@"^\d*$");
+                //Match match = Regex.Match(args.NewText, r.ToString());
+                //if (!match.Success)
+                //{ 
+                //    //If it doesn't match the regex, we cancel it.
+                //    args.Cancel = args.NewText.Any();
+                //}
         }
     }
 }
