@@ -9,23 +9,25 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
-    xmlns:core="using:Microsoft.Xaml.Interactions.Core">
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core" Width="804">
     <Page.DataContext>
         <viewModel:MainPageViewModel/>
     </Page.DataContext>
-    <Grid>
+    <Grid Margin="0,0,10,10" VerticalAlignment="Stretch">
         <StackPanel Orientation="Vertical"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top" 
-                    Margin="0,10,0,0" 
-                    Height="410"
-                    Width="750">
-            <TextBlock Text="Please, Insert the sides of the triangle below" FontSize="36" IsHitTestVisible="False"/>
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" 
+                    Height="970"
+                    Width="794">
+            <TextBlock Text="Please, Insert the sides of the triangle below" 
+                       FontSize="36" 
+                       IsHitTestVisible="False"
+                       Margin="50,50"/>
             <TextBox Text="{Binding Side1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                      Header="Side A"
                      Width="250"
                      Margin="30, 10"
-                     HorizontalAlignment="Left" 
+                     HorizontalAlignment="Center" 
                      FontSize="20"
                      InputScope="Number"
                      BeforeTextChanging="ValidateIsNumber"/>
@@ -33,7 +35,7 @@
                      Header="Side B"
                      Width="250"
                      Margin="30, 10"
-                     HorizontalAlignment="Left"
+                     HorizontalAlignment="Center"
                      FontSize="20"
                      InputScope="Number"
                      BeforeTextChanging="ValidateIsNumber"/>
@@ -41,20 +43,24 @@
                      Header="Side C"
                      Width="250"
                      Margin="30, 10"
-                     HorizontalAlignment="Left"
+                     HorizontalAlignment="Center"
                      FontSize="20"
                      InputScope="Number"
                      BeforeTextChanging="ValidateIsNumber"/>
-        </StackPanel>
-        <StackPanel Orientation="Vertical"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center" 
-                    Margin="789,0,0,0" 
-                    Height="1000"
-                    Width="711">
             <TextBlock 
-                Text="{Binding Result}" 
-                Margin="10,10"
+                Text="{Binding Result}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="10,50"
+                FontSize="36" 
+                IsHitTestVisible="False"
+                Visibility="{Binding IsValidated}"
+               />
+            <TextBlock 
+                Text="{Binding TriangleType}"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="10,50"
                 FontSize="36" 
                 IsHitTestVisible="False"
                 Visibility="{Binding IsValidated}"

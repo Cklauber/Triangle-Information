@@ -15,35 +15,79 @@ namespace Triangle_Information.ViewModel
         private int value2_ = 0;
         private int value3_ = 0;
         private bool isValidated_ = true;
-        private string result_ = "something";
+        private string result_ = "";
+        private string triangleType_ = "";
 
-        public int Side1
+        public string Side1
         {
-            get { return value1_; }
+            get
+            {
+                if(value1_ == 0)
+                {
+                    return "";
+                }
+                else
+                {
+                    return value1_.ToString();
+                }
+            }
             set
             {
-                value1_ = value;
+                if (value == "")
+                {
+                    value = "0";
+                }
+                value1_ = Int32.Parse(value);
                 OnPropertyChanged("Value1");
                 validator();
 
             }
         }
-        public int Side2
+        public string Side2
         {
-            get { return value2_; }
+            get
+            {
+                if (value2_ == 0)
+                {
+                    return "";
+                }
+                else
+                {
+                    return value2_.ToString();
+                }
+            }
             set
             {
-                value2_ = value;
+                if (value == "")
+                {
+                    value = "0";
+                }
+                value2_ = Int32.Parse(value);
                 OnPropertyChanged("Value2");
                 validator();
+
             }
         }
-        public int Side3
+        public String Side3
         {
-            get { return value3_; }
+            get
+            {
+                if (value3_ == 0)
+                {
+                    return "";
+                }
+                else
+                {
+                    return value2_.ToString();
+                }
+            }
             set
             {
-                value3_ = value;
+                if(value == "")
+                {
+                    value = "0";
+                }
+                value3_ = Int32.Parse(value);
                 OnPropertyChanged("Value3");
                 validator();
             }
@@ -51,6 +95,10 @@ namespace Triangle_Information.ViewModel
         public string Result
         {
             get => result_;
+        }
+        public string TriangleType
+        {
+            get => triangleType_;
         }
         public bool IsValidated
         {
@@ -69,7 +117,22 @@ namespace Triangle_Information.ViewModel
             {
                 isValidated_ = true;
                 OnPropertyChanged("IsValidated");
-                result_ = "This is a valid triangle";
+                triangle_ = new Triangle(value1_, value2_, value3_);
+                System.Diagnostics.Debug.WriteLine(value1_);
+                System.Diagnostics.Debug.WriteLine(value2_);
+                System.Diagnostics.Debug.WriteLine(value3_);
+                System.Diagnostics.Debug.WriteLine(triangle_.isValid());
+                if (triangle_.isValid())
+                {
+                    result_ = "This is a valid triangle";
+                    triangleType_ = triangle_.triangleType();
+                    OnPropertyChanged("TriangleType");
+                }
+                else
+                {
+                    result_ = "This is not a valid triangle";
+                }
+
                 OnPropertyChanged("Result");
                 System.Diagnostics.Debug.WriteLine("Valid");
             }
