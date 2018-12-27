@@ -150,6 +150,8 @@ namespace Triangle_Information.ViewModel
                 else
                 {
                     result_ = "This is not a valid triangle";
+                    triangleType_ = triangle_.getTriangleType();
+                    OnPropertyChanged("TriangleType");
                 }
                 OnPropertyChanged("Result");
             }

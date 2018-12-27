@@ -36,7 +36,7 @@ namespace Triangle_Information
         public bool isValid()
         { 
             bool valid = false;
-            if(sides[0] + sides[1] > sides[2] || sides[1] + sides[2] > sides[0] || sides[2] + sides[0] > sides[2])
+            if(sides[0] + sides[1] > sides[2] && sides[1] + sides[2] > sides[0] && sides[2] + sides[0] > sides[2])
             {
                 valid = true;
             }
@@ -44,33 +44,38 @@ namespace Triangle_Information
         }
         public string getTriangleType()
         {
-            string type = "Triangle";
-            int biggerSide = sides.Max();
-            int[] bc = sides.Except(sides.Where(a => a == biggerSide)).ToArray();
-            try
+            if (this.isValid())
             {
-                if (Math.Pow(biggerSide, 2) == (Math.Pow(bc[0],2) + Math.Pow(bc[1], 2)))
+                string type = "Triangle";
+                int biggerSide = sides.Max();
+                int[] bc = sides.Except(sides.Where(a => a == biggerSide)).ToArray();
+                try
                 {
-                    type = "Right";
+                    if (Math.Pow(biggerSide, 2) == (Math.Pow(bc[0], 2) + Math.Pow(bc[1], 2)))
+                    {
+                        type = "Right";
+                        return type;
+                    }
+                }
+                catch
+                {
+                    //Not a right triangle.
+                }
+                if (sides[0] == sides[1] & sides[1] == sides[2])
+                {
+                    type = "Equilateral";
                     return type;
                 }
-            }
-            catch
-            {
-                //Not a right triangle.
-            }
-            if (sides[0] == sides[1] & sides[1] == sides[2])
-            {
-                type = "Equilateral";
-                return type;
-            }
-            if (sides[0] == sides[1] || sides[1] == sides[2] || sides[0] == sides[1])
-            {
-                type = "Isosceles";
-                return type;
-            }
+                if (sides[0] == sides[1] || sides[1] == sides[2] || sides[0] == sides[2])
+                {
+                    type = "Isosceles";
+                    return type;
+                }
 
-            return type;
+                return type;
+            }
+            else return "";
+
         }
 
     }
